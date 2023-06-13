@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Price Feed Frontend</title>
+</head>
+<body>
+  <h1>Price Feed Frontend</h1>
+  <div id="priceContainer"></div>
+
+  <script>
+    // JavaScript code for interacting with the price feed backend
+
+    // Define the contract address
+    const contractAddress = "0x123456789abcdefg";
+
+    // Instantiate the contract
+    const contract = new ethers.Contract(contractAddress, abi, provider);
+
+    // Function to display price information
+    async function displayPrice() {
+      const priceContainer = document.getElementById("priceContainer");
+
+      // Get the price of token WBNB
+      const priceWBNB = await contract.getPriceWBNBUSDT();
+      const priceTokenWBNB = await contract.getPriceTokenWBNB("0xTokenAddress");
+
+      // Create an HTML element for displaying the price
+      const priceElement = document.createElement("div");
+      priceElement.innerHTML = `
+        <h3>Price WBNB/USDT: ${priceWBNB}</h3>
+        <h3>Price Token/WBNB: ${priceTokenWBNB}</h3>
+      `;
+
+      // Append the price element to the container
+      priceContainer.appendChild(priceElement);
+    }
+
+    // Call the displayPrice function to show the price
+    displayPrice();
+  </script>
+</body>
+</html>
