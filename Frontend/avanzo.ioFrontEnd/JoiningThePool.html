@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Pool</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="FundFactory.html">FundFactory</a>
+        <a href="JoiningThePool.html">Participate</a>
+        <a href="MarketPlace">Buy&Sell</a>
+        <a href="https://t.me/AvanzoCrypto">Contact-Us</a>
+        <a href="https://avanzo.gitbook.io/whitepaper/">White-Paper</a>
+      </div>
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="OpenBTN">&#9776; open</span>
+  
+      <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+  
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+      </script>
+
+    <div class="container">
+    <h1>Join Pool</h1>
+    <form id="joinPoolForm">
+        <label for="userAddress">User Address:</label>
+        <input type="text" id="userAddress" required>
+        
+        <label for="poolId">Pool ID:</label>
+        <select id="poolId" required></select>
+
+        <label for="fundsAmount">Funds Amount  in $:</label>
+        <input type="number" id="fundsAmount" required>
+        
+        <button type="submit">Join Pool</button>
+    </form>
+</div>
+</body>
+</html>

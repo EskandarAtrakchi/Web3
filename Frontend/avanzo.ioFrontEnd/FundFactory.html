@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fund Factory Interaction</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="FundFactory.html">FundFactory</a>
+            <a href="JoiningThePool.html">Participate</a>
+            <a href="MarketPlace">Buy&Sell</a>
+            <a href="https://t.me/AvanzoCrypto">Contact-Us</a>
+            <a href="https://avanzo.gitbook.io/whitepaper/">White-Paper</a>
+          </div>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="OpenBTN">&#9776; open</span>
+      
+          <script>
+          function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+          }
+      
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+          </script>
+        
+        <h1>Avanzo Fund Factory</h1>
+
+        <form id="createFundPoolForm">
+            <label for="tokenAddress">Token Address:</label>
+            <input type="text" id="tokenAddress" required>
+
+            <label for="teamAddress">Team Address:</label>
+            <input type="text" id="teamAddress" required>
+
+            <label for="cap">Cap:</label>
+            <input type="number" id="cap" required>
+
+            <label for="kyc">KYC Status:</label>
+            <select id="kyc">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+
+            <button type="submit">Create Fund Pool</button>
+        </form>
+
+        <div id="fundPoolAddress"></div>
+    </div>
+</body>
+</html>
