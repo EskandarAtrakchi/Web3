@@ -31,20 +31,21 @@
       }
       </script>
 
-    <div class="container">
-    <h1>Join Pool</h1>
-    <form id="joinPoolForm">
-        <label for="userAddress">User Address:</label>
-        <input type="text" id="userAddress" required>
-        
-        <label for="poolId">Pool ID:</label>
-        <select id="poolId" required></select>
+      <div class="container">
+        <h1>Join Pool</h1>
+        <form id="joinPoolForm">
+            <label for="userAddress">User Address:</label>
+            <input type="text" id="userAddress" readonly>
 
-        <label for="fundsAmount">Funds Amount  in $:</label>
-        <input type="number" id="fundsAmount" required>
-        
-        <button type="submit">Join Pool</button>
-    </form>
-</div>
+            <label for="poolId">Pool ID:</label>
+            <select id="poolId" required></select>
+
+            <label for="fundsAmount">Funds Amount in $:</label>
+            <input type="number" id="fundsAmount" required>
+
+            <button type="submit">Join Pool</button>
+        </form>
+        <button id="connectWalletBtn" onclick="connectWallet()">Connect Wallet</button>
+      </div>
 </body>
 </html>
