@@ -1,11 +1,11 @@
-// this file is connected to Marketplace
+// this file is connected to Marketplace.html
 
 async function getDollarBalance() {
 
     const tokenId = document.getElementById('tokenId').value;
     const contractAddress = 'BUSD_CONTRACT_ADDRESS'; // BUSD contract address
     const contractABI = [
-        // ABI here for the BUSD token contract
+        // ABI here
     ];
 
     const web3 = new Web3(window.ethereum);
