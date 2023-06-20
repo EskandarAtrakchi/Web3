@@ -1,3 +1,5 @@
+//Important NOTE:  include the necessary getNFTsPrice.js, MarketPlace.js, and WalletConnect.js files for the functionality to work correctly.
+
 // Connect to the Binance Smart Chain using Web3
 const web3 = new Web3("https://bsc-xxxxxxxxxxxx");
 
@@ -18,7 +20,7 @@ async function populateNFTs() {
 
     // Get the sale info for each sale ID
     const nftSelect = document.getElementById('nftSelect');
-    nftSelect.innerHTML = ''; // Clear the select options
+    //nftSelect.innerHTML = ''; // Clear the select options
 
     for (let i = 0; i < saleIds.length; i++) {
 
@@ -165,3 +167,25 @@ document.getElementById('buyForm').addEventListener('submit', buyNFT);
 // Populate the available NFTs and user's NFTs on page load
 populateNFTs();
 populateMyNFTs();
+
+/*
+Get NFT Price:
+The user can enter a token ID and click the "Get Dollar Balance" button.
+The JavaScript function getDollarBalance() is triggered, which retrieves the price of the NFT associated with the given token ID.
+The result is displayed on the page.
+Sell NFT:
+The user can enter the NFT address, NFT ID, and set the price for their NFT.
+When the user clicks the "Sell NFT" button, the JavaScript function sellNFT() is called.
+The function calls the setOnSale function in the smart contract, passing the provided NFT address, NFT ID, and price.
+If the transaction is successful, an alert is displayed to the user, and the list of available NFTs is refreshed.
+Buy NFT:
+The user can select an NFT from the dropdown menu that displays the NFTs available for sale by other users.
+After selecting an NFT, the user clicks the "Buy NFT" button.
+The JavaScript function buyNFT() is called.
+The function calls the buyNFT function in the smart contract, passing the selected sale ID.
+If the transaction is successful, an alert is displayed to the user, and the list of available NFTs and the user's NFTs are refreshed.
+My NFTs:
+The code includes a section labeled "My NFTs" that displays the NFTs owned by the connected wallet.
+The function populateMyNFTs() retrieves the user's address and gets the balance of NFTs owned by the user.
+It then displays the user's NFTs on the page.
+*/
