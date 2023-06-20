@@ -19,7 +19,6 @@
         <a href="MarketPlace">Buy&Sell</a>
         <a href="https://t.me/AvanzoCrypto">Contact-Us</a>
         <a href="https://avanzo.gitbook.io/whitepaper/">White-Paper</a>
-        <a id="connectWalletBtn" onclick="connectWallet()">Connect Wallet</a>
       </div>
       <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="OpenBTN">&#9776; open</span>
   
@@ -34,6 +33,8 @@
       </script>
 
       <div class="container">
+        <button id="BTNTESTART" class="button" onclick="connectWallet()">connectWallet</button>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
         <h1>Join Pool</h1>
         <form id="joinPoolForm">
             <label for="userAddress">User Address:</label>

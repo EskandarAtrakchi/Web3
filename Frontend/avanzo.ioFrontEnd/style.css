@@ -156,3 +156,22 @@ background-color: #45a049;
 .button:active {
 background-color: #3e8e41;
 }
+
+#BTNTESTART {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  #BTNTESTART {
+    width: 100%;
+    font-size: 14px;
+  }
+}
