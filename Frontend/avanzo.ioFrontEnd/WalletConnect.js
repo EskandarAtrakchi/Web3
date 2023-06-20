@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {//DOMContentLoaded event is
       const { web3, accounts } = await getWeb3();
       const connectedAddress = accounts[0];
       connectButton.textContent = connectedAddress.substring(0, 8) + "...";//trim the address 
-      console.log("Web3 connected:", web3);
+      alert("Web3 connected:", web3);
 
     } 
     
