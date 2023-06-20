@@ -1,8 +1,8 @@
 // Connect to BSC using Web3
-const web3 = new Web3("https://bsc-xxxxxxxxx");
+const web3 = new Web3("https://bsc-dataseed.binance.org/");
 
 // Retrieve the address of the deployed FundFactory contract on the BSC network
-const factoryAddress = "0x..."; // FundFactory contract address
+const factoryAddress = "0x14c68be85fCfff02604A47f3d3cff956a515C613"; // FundFactory contract address
 
 // FundFactory ABI
 const factoryABI = [
@@ -38,9 +38,9 @@ async function createFundPool(event) {
         const runningCount = await factoryContract.methods.runningCount().call();
         const fundPoolAddress = await factoryContract.methods.getAddressOfId(runningCount - 1).
         call();
-        console.log(fundPoolAddress);
+        const fundPoolId = runningCount - 1; // Calculate the pool ID
         const fundPoolAddressElement = document.getElementById("fundPoolAddress");
-        fundPoolAddressElement.innerHTML = `Fund Pool Address: ${fundPoolAddress}`;
+        fundPoolAddressElement.innerHTML = `Fund Pool Address: ${fundPoolAddress}<br>Pool ID: ${fundPoolId}`;
 
     } 
     
