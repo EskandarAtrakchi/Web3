@@ -27,3 +27,10 @@ async function getInvestedPoolIds() {
     alert('Error:', error);
   }
 }
+/*
+When the user clicks on the "Click Me" button, the getInvestedPoolIds() function is called.
+The function prompts the user to connect their wallet.
+After connecting the wallet, the user's address is obtained.
+The contract's getInvestedIdsOf function is called to retrieve the pool IDs associated with the user's address.
+The obtained pool IDs are displayed on the webpage.
+*/
