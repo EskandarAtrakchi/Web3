@@ -32,7 +32,7 @@ async function createFundPool(event) {
         //     return;
         // }
 
-        //keep the KYC thing for later (Ask the CEO if he want to check users for their KYC status)
+        //keep the KYC thing for later (Ask the CEO if he reall wants to check users for their KYC status)
         await factoryContract.methods.createFundPool(tokenAddress, teamAddress, cap, kyc).send({ from: web3.eth.defaultAccount });
 
         const runningCount = await factoryContract.methods.runningCount().call();
