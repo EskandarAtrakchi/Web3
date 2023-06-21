@@ -1,13 +1,11 @@
+import contractABI from './FundFactoryABI.js';
 // Connect to BSC using Web3
 const web3 = new Web3("https://bsc-dataseed.binance.org/");
 
 // Retrieve the address of the deployed FundFactory contract on the BSC network
 const factoryAddress = "xxxxxxxxxxxx"; // FundFactory contract address
 
-// FundFactory ABI
-const factoryABI = [
-    // ... interface ABI
-];
+// FundFactory ABI is imported from './FundFactoryABI.js';
 
 // Create an instance of the FundFactory contract
 const factoryContract = new web3.eth.Contract(factoryABI, factoryAddress);
