@@ -1,3 +1,4 @@
+//There is mapping function in solidity, so pool ID should be enough for the voting button to work properly
 window.addEventListener('DOMContentLoaded', async () => {
 // Check if Web3 is available
 if (typeof web3 !== 'undefined') {

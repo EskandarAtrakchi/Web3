@@ -1,11 +1,7 @@
-/*
-    <script>
-        function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        }
+function openNav() {
+document.getElementById("mySidenav").style.width = "250px";
+}
 
-        function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
-*/
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+}
