@@ -75,5 +75,5 @@ The createFundPool function is defined, which is invoked when the form is submit
 Inside the createFundPool function, it retrieves the values entered in the form fields (token address, team address, cap, and KYC status).
 It calls the createFundPool method of the FundFactory contract, passing the entered values as arguments. This function is responsible for creating a new fund pool.
 If the transaction is successful, it retrieves the newly created fund pool's address and ID using the getAddressOfId and runningCount functions of the FundFactory contract.
-The fund pool's address and ID are displayed on the webpage.
+//The fund pool's address and ID are displayed on the webpage.
 */
