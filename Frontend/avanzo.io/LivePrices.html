@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(3, 3, 3, 0.3);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            
+        }
+
+        .LivePrices{
+            padding-left: 1%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-right: 1%;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <p>
+            Live Prices
+        </p>
+    </div>
+    <div class="LivePrices" >
+        <script>
+            ! function() {
+                var e = document.getElementsByTagName("script"),
+                    t = e[e.length - 1],
+                    n = document.createElement("script");
+        
+                function r() {
+                    var e = crCryptocoinPriceWidget.init({
+                        base: "USD,EUR",
+                        items: "GLQ,BTC,ETH,XRP,NANO",
+                        backgroundColor: "0a2713",
+                        streaming: "1",
+                        rounded: "1",
+                        boxShadow: "9",
+                        border: "5"
+                    });
+                    t.parentNode.insertBefore(e, t)
+                }
+                n.src = "https://co-in.io/widget/pricelist.js?items=BTC%2CETH%2CLTC%2CXMR%2CDASH", 
+                n.async = !0, n.readyState ? n.onreadystatechange = function() {
+                    "loaded" != n.readyState && "complete" != n.readyState || (n.onreadystatechange = null, r())
+                } : n.onload = function() {
+                    r()
+                }, t.parentNode.insertBefore(n, null)
+            }();
+        </script>
+    </div>
+</body>
+</html>
