@@ -2,7 +2,7 @@
 const web3 = new Web3("https://bsc-dataseed.binance.org/");
 
 // Retrieve the address of the deployed FundFactory contract on the BSC network
-const factoryAddress = "0x14c68be85fCfff02604A47f3d3cff956a515C613"; // FundFactory contract address
+const factoryAddress = "xxxxxxxxxxxx"; // FundFactory contract address
 
 // FundFactory ABI
 const factoryABI = [
