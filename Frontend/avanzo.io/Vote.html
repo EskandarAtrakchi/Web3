@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Voting</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="Vote.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="WalletConnect.js"></script>
+</head>
+<body>
+    <div class="container">
+
+      <button id="BTNTESTART" class="button" onclick="connectWallet()">Connect-Wallet</button>
+      <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="JoiningThePool.html">Participate</a>
+            <a href="MarketPlace">Buy&Sell</a>
+            <a href="https://t.me/AvanzoCrypto">Contact-Us</a>
+            <a href="https://avanzo.gitbook.io/whitepaper/">White-Paper</a>
+            <a href="cancelPool.html">Cancel-Pool</a>
+            <a href="myPools.html">My-Pool/s</a>
+        </div>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="OpenBTN">&#9776; open</span>
+    
+        <script>
+        function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        }
+    
+        function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+
+        <h1>Pool Voting</h1>
+
+        <div>
+            <label for="poolId">Pool ID:</label>
+            <input type="number" id="poolId">
+            <button onclick="vote()">Vote</button>
+        </div>
+
+        <div>
+            <h2>Vote Percentage:</h2>
+            <div id="votePercentage"></div>
+        </div>
+    </div>
+</body>
+</html>
