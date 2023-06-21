@@ -73,3 +73,11 @@ async function joinPool(event) {
 // Attach the event listener to the form submission
 document.getElementById('joinPoolForm').addEventListener('submit', joinPool);
     
+/*
+When the user connects their wallet, the "User Address" field is automatically filled with the address of their connected wallet.
+The available pools are retrieved from the smart contract and displayed as options in the "Pool ID" dropdown menu. The user can select one of the pools.
+The user can enter the amount of funds they want to contribute to the selected pool in the "Funds Amount" field.
+When the user clicks the "Join Pool" button, the joinPool() function is triggered. It retrieves the user's input values (user address, pool ID, and funds amount).
+The function then interacts with the smart contract by calling the joinPool() function, passing the user's input values as arguments.
+If the transaction is successful, the transaction result is logged to the console.
+*/
