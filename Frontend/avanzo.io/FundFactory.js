@@ -33,11 +33,15 @@ async function createFundPool(event) {
 
     try {
 
-        // Perform KYC check here if needed
-        // if (!isKYCed) {
-        //     console.log("User is not verified (KYC status is false)");
-        //     return;
-        // }
+        // Get the KYC status of the user
+        const isKYCed = await factoryContract.methods.isKYCed(web3.eth.defaultAccount).call();
+
+        //Perform KYC check here if needed
+        if (!isKYCed) {
+            console.log("User is not verified (KYC status is false)");
+            alert("User is not verified (KYC status is false)");
+            return;
+        }
 
         //keep the KYC thing for later (Ask the CEO if he reall wants to check users for their KYC status)
         //Note: I can hard code the address here send({ from: web3.eth.defaultAccount }) instead of web3.eth.defaultAccount
