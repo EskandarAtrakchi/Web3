@@ -19,9 +19,17 @@ async function getNFTsOwnedByUser() {
   
     // Loop through the user's NFTs and retrieve their IDs
     const nftIds = [];
+    
     for (let i = 0; i < balance; i++) {
-      const nftId = await poolContract.methods.tokenOfOwnerByIndex(userAddress, i).call();
-      nftIds.push(nftId);
+
+        const nftId = await poolContract.methods.tokenOfOwnerByIndex(userAddress, i).call();
+        nftIds.push(nftId);
+
+        // Create a new HTML element for each NFT ID and append it to the page
+        const nftElement = document.createElement('div');
+        nftElement.textContent = `NFT ID: ${nftId}`;
+        document.body.appendChild(nftElement);
+
     }
   
     return nftIds;
