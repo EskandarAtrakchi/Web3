@@ -1,50 +1,54 @@
-//There is mapping function in solidity, so pool ID should be enough for the voting button to work properly
-window.addEventListener('DOMContentLoaded', async () => {
-// Check if Web3 is available
-if (typeof web3 !== 'undefined') {
-    web3 = new Web3(web3.currentProvider);
-} else {
-    console.error('Web3 not found. Please make sure MetaMask is installed.');
-    return;
+async function getNFTsOwnedByUser() {
+
+    // Get the contract instance
+    const fundFactoryAddress = "0x8CE38aaeb020E6c5fC5782493427894dCc6778A4";
+    import fundFactoryABI from './contractsABIs/FundFactoryABI.js';
+    import avanzoNFTABI from './contractsABIs/avanzoNFTABI.js';
+  
+    // Get the contract instance for the specified pool
+    const fundFactoryContract = new web3.eth.Contract(fundFactoryABI, fundFactoryAddress);
+    const poolAddress = await fundFactoryContract.methods.getAddressOfId(poolId).call();
+    const poolContract = new web3.eth.Contract(avanzoNFTABI, poolAddress);
+  
+    // Get the user's account address
+    const accounts = await web3.eth.requestAccounts();
+    const userAddress = accounts[0];
+  
+    // Call the balanceOf function to get the number of NFTs owned by the user
+    const balance = await poolContract.methods.balanceOf(userAddress).call();
+  
+    // Loop through the user's NFTs and retrieve their IDs
+    const nftIds = [];
+    for (let i = 0; i < balance; i++) {
+      const nftId = await poolContract.methods.tokenOfOwnerByIndex(userAddress, i).call();
+      nftIds.push(nftId);
+    }
+  
+    return nftIds;
+
 }
+  
+window.vote = async (vote) => {
 
-// Get the contract instance
-const contractAddress = 'CONTRACT_ADDRESS'; // Replace with your actual contract address
-const contractABI = []; // Replace with your actual contract ABI
-const contract = new web3.eth.Contract(contractABI, contractAddress);
-
-// Update the vote percentage display
-updateVotePercentage();
-
-// Function to vote on the pool
-window.vote = async () => {
     const poolId = document.getElementById('poolId').value;
+    const proposalId = document.getElementById('proposalId').value;
+    const nftId = document.getElementById('nftId').value;
+
+    // Get the contract instance for the specified pool
+    const fundFactoryContract = new web3.eth.Contract(fundFactoryABI, fundFactoryAddress);
+    const poolAddress = await fundFactoryContract.methods.getAddressOfId(poolId).call();
+    const poolContract = new web3.eth.Contract(avanzoNFTABI, poolAddress);
 
     // Call the vote function in the contract
     try {
-    const accounts = await web3.eth.requestAccounts();
-    const fromAddress = accounts[0];
+        const accounts = await web3.eth.requestAccounts();
+        const fromAddress = accounts[0];
 
-    await contract.methods.vote(poolId).send({ from: fromAddress });
-    console.log('Vote successful');
-    alert('Vote successful');
-    updateVotePercentage();
+        await poolContract.methods.vote(proposalId, vote, nftId).send({ from: fromAddress });
+        console.log('Vote successful');
+        alert('Vote successful');
     } catch (error) {
-    console.error('Vote failed:', error);
-    alert('Vote failed. Please check the console for details.');
+        console.error('Vote failed:', error);
+        alert('Vote failed. Please check the console for details.');
     }
 };
-
-// Function to update the vote percentage display
-async function updateVotePercentage() {
-    const poolId = document.getElementById('poolId').value;
-
-    // Call the getVotePercentage function in the contract
-    try {
-    const votePercentage = await contract.methods.getVotePercentage(poolId).call();
-    document.getElementById('votePercentage').textContent = `${votePercentage}%`;
-    } catch (error) {
-    console.error('Failed to get vote percentage:', error);
-    }
-}
-});
