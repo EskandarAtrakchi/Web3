@@ -2,13 +2,19 @@
 const web3 = new Web3(window.ethereum);
 
 // Contract address and ABI
-const contractAddress = 'YOUR_CONTRACT_ADDRESS';
-const contractABI = [
-  // Paste your contract's ABI here
+const FundFactorycontractAddress = 'CONTRACT_ADDRESS';
+const FundFactorycontractABI = [
+  // contract's ABI here
+];
+const AvanzoNFTcontractAddress = 'AVANZO_NFT_ADVERTIS';
+const AvanzoNFTcontractABI = [
+  // contract's ABI here
 ];
 
-// Instantiate the contract
-const contract = new web3.eth.Contract(contractABI, contractAddress);
+//// Instantiate the AvanzoNFTcontract
+const AvanzoNFTcontract = new web3.eth.Contract(AvanzoNFTcontractABI, AvanzoNFTcontractAddress);
+// Instantiate the FundFactorycontract
+const FundFactorycontract = new web3.eth.Contract(FundFactorycontractABI, FundFactorycontractAddress);
 
 // Function to cancel a pool
 async function cancelPool() {
@@ -21,15 +27,22 @@ async function cancelPool() {
     const proposalId = parseInt(document.getElementById('proposalId').value);
 
     // Call the contract's endPoolsOf function
-    await contract.methods.endPoolsOf([poolId], [proposalId]).send();
+    await FundFactorycontract.methods.endPoolsOf([poolId], [proposalId]).send();
 
     console.log('Pool cancelled successfully!');
+    alert('Pool cancelled successfully!');
   } catch (error) {
     console.error('Error:', error);
   }
 }
+
+async function WithdrawPool() {
+
+  const tokenId = ""; // The ID of the token to withdraw
+  await AvanzoNFTcontract.methods.withdraw(tokenId).send({ from: userAddress });
+
+}
 /*
-The HTML code provides a user interface for the owner to input the pool ID and proposal ID of the pool they want to cancel.
 When the owner clicks the "Cancel Pool" button, the cancelPool() JavaScript function is invoked.
 The JavaScript code initializes Web3 and connects to the user's wallet using the window.ethereum object.
 It retrieves the pool ID and proposal ID entered by the owner from the input fields in the HTML.

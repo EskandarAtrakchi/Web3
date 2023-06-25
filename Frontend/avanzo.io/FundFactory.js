@@ -40,10 +40,15 @@ avanzoNFTContract.events.newProposal({
     fromBlock: 0
 }, 
 function(error, event) {
+
     if (error) {
         console.error(error);
         alert.error(error);
     } else {
+
+        const end = document.getElementById('end').value; // The end time of the proposal
+        const proposal = document.getElementById('proposalTextField').value; // The text of the proposal
+        await avanzoNFTContract.methods.createProposal(end, proposal).send({ from: userAddress });
         // Get the proposal text and ID from the event
         const proposalText = event.returnValues.proposal;
         const proposalId = event.returnValues.id;
