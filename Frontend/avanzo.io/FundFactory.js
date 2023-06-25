@@ -39,25 +39,30 @@ const avanzoNFTContract = new web3.eth.Contract(avanzoNFTABI, avanzoNFTAddress);
 avanzoNFTContract.events.newProposal({
     fromBlock: 0
 }, 
-function(error, event) {
-
+async function(error, event) {
     if (error) {
         console.error(error);
         alert.error(error);
     } else {
-
         const end = document.getElementById('end').value; // The end time of the proposal
         const proposal = document.getElementById('proposalTextField').value; // The text of the proposal
-        await avanzoNFTContract.methods.createProposal(end, proposal).send({ from: userAddress });
-        // Get the proposal text and ID from the event
-        const proposalText = event.returnValues.proposal;
-        const proposalId = event.returnValues.id;
-
-        // Display the proposal text and ID on the user interface
-        const proposalElement = document.getElementById("fundPoolAddress");
-        proposalElement.innerHTML = `<br>Proposal: ${proposalText} <br>(ID: ${proposalId})<br>`;
+        
+        try {
+            await avanzoNFTContract.methods.createProposal(end, proposal).send({ from: userAddress });
+            
+            // Get the proposal text and ID from the event
+            const proposalText = event.returnValues.proposal;
+            const proposalId = event.returnValues.id;
+    
+            // Display the proposal text and ID on the user interface
+            const proposalElement = document.getElementById("fundPoolAddress");
+            proposalElement.innerHTML = `<br>Proposal: ${proposalText} <br>(ID: ${proposalId})<br>`;
+        } catch (error) {
+            console.error(error);
+        }
     }
 });
+
 
     const tokenAddress = document.getElementById("tokenAddress").value;
     const teamAddress = document.getElementById("teamAddress").value;
