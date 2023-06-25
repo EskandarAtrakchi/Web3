@@ -163,30 +163,7 @@ contract AvanzoNFT is ERC721, Ownable {
         tokenIdToUSDT[_tkIds[0]] += _tDollar;
     }
     
-    function withdraw(uint _tokenId) public {
-        require(dead, "pool still alive");
-        uint256 toSend = getDollarBalanceOf(_tokenId);
-        require(ownerOf(_tokenId) == msg.sender, "!owner, nft");
-        _transfer(msg.sender, address(this), _tokenId);
-        uint256 amountInTokens = (toSend * 1e18) / priceFeed.getPriceTokenUSDT(address(token));
-        require(IERC20(token).transfer(msg.sender, amountInTokens), "transfer failed, tokens!");
-        emit newWithdraw(msg.sender, amountInTokens, toSend);
-    }
-    function distributeRewards(uint256 _amount, IERC20 _token) public {
-        require(depositsClosed, "deposits still going");
-        require(!dead, "pool is dead");
-        uint256 balBefore = _token.balanceOf(address(this));
-        require(_token.transferFrom(msg.sender, address(this), _amount));
-        uint256 sent = _token.balanceOf(address(this)) - balBefore;
-        uint256 rate = (sent*1e18) / tDollar;
-        for(uint256 i; i < holders.length; i++) {
-            uint[] memory values = new uint[](holders.length);
-            values = _getValues();
-            uint256 tosend = (values[i] * rate) / 1e18;
-            require(_token.transfer(holders[i], tosend));
-        }
-        emit distRewards(msg.sender, sent, address(_token));
-    }
+    
     function getAllNFTsOwnerBy(address _add) public view returns(uint[] memory){
         uint count;
         uint[] memory _tkIds = new uint[](balanceOf(_add));
@@ -246,6 +223,31 @@ contract AvanzoNFT is ERC721, Ownable {
         string proposal;
         uint256 powerYes;
         uint256 powerNo;
+    }
+
+    function withdraw(uint _tokenId) public {
+        require(dead, "pool still alive");
+        uint256 toSend = getDollarBalanceOf(_tokenId);
+        require(ownerOf(_tokenId) == msg.sender, "!owner, nft");
+        _transfer(msg.sender, address(this), _tokenId);
+        uint256 amountInTokens = (toSend * 1e18) / priceFeed.getPriceTokenUSDT(address(token));
+        require(IERC20(token).transfer(msg.sender, amountInTokens), "transfer failed, tokens!");
+        emit newWithdraw(msg.sender, amountInTokens, toSend);
+    }
+    function distributeRewards(uint256 _amount, IERC20 _token) public {
+        require(depositsClosed, "deposits still going");
+        require(!dead, "pool is dead");
+        uint256 balBefore = _token.balanceOf(address(this));
+        require(_token.transferFrom(msg.sender, address(this), _amount));
+        uint256 sent = _token.balanceOf(address(this)) - balBefore;
+        uint256 rate = (sent*1e18) / tDollar;
+        for(uint256 i; i < holders.length; i++) {
+            uint[] memory values = new uint[](holders.length);
+            values = _getValues();
+            uint256 tosend = (values[i] * rate) / 1e18;
+            require(_token.transfer(holders[i], tosend));
+        }
+        emit distRewards(msg.sender, sent, address(_token));
     }
     mapping(uint256 => Vote) proposals; 
     mapping(uint => mapping(uint256 => bool)) hasVoted; 
