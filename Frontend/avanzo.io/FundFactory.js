@@ -26,6 +26,34 @@ async function createFundPool(event) {
     }
     */
 
+// Import the AvanzoNFT contract ABI
+import avanzoNFTABI from './contractsABIs/avanzoNFTABI.js';
+
+// the address of your AvanzoNFT (NFT_flat.sol) contract
+const avanzoNFTAddress = 'AVANZO_NFT_CONTRACT_ADDRESS';
+
+// Create an instance of the AvanzoNFT contract
+const avanzoNFTContract = new web3.eth.Contract(avanzoNFTABI, avanzoNFTAddress);
+
+// Listen for the newProposal event
+avanzoNFTContract.events.newProposal({
+    fromBlock: 0
+}, 
+function(error, event) {
+    if (error) {
+        console.error(error);
+        alert.error(error);
+    } else {
+        // Get the proposal text and ID from the event
+        const proposalText = event.returnValues.proposal;
+        const proposalId = event.returnValues.id;
+
+        // Display the proposal text and ID on the user interface
+        const proposalElement = document.getElementById("fundPoolAddress");
+        proposalElement.innerHTML = `<br>Proposal: ${proposalText} <br>(ID: ${proposalId})<br>`;
+    }
+});
+
     const tokenAddress = document.getElementById("tokenAddress").value;
     const teamAddress = document.getElementById("teamAddress").value;
     const cap = document.getElementById("cap").value;

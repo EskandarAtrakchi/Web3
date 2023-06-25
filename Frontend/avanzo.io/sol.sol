@@ -162,26 +162,7 @@ contract AvanzoNFT is ERC721, Ownable {
         }
         tokenIdToUSDT[_tkIds[0]] += _tDollar;
     }
-    function split(uint _fromTokenId, uint _dollarAmount) public {
-        require(msg.sender == ownerOf(_fromTokenId), "!owner, nft");
-        require(!voteOnGoing(), "split paused while ongoing vote!");
-        require(_dollarAmount >= 500e18, "500$ min!");
-        require(tokenIdToUSDT[_fromTokenId] - _dollarAmount > 500e18, "500$ must be left atleast!");
-        tokenIdToUSDT[_fromTokenId] -= _dollarAmount;
-        if(toMint.length != 0)  {
-            uint CtokenId = toMint.length-1;
-            toMint.pop();
-            _balances[msg.sender] += 1;
-            _owners[CtokenId] = msg.sender;
-            tokenIdToUSDT[CtokenId] = _dollarAmount;
-        }
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _balances[msg.sender] += 1;
-        _owners[tokenId] = msg.sender;
-        tokenIdToUSDT[tokenId] = _dollarAmount;
-        _checkHolder(msg.sender);
-    }
+    
     function withdraw(uint _tokenId) public {
         require(dead, "pool still alive");
         uint256 toSend = getDollarBalanceOf(_tokenId);
@@ -236,6 +217,26 @@ contract AvanzoNFT is ERC721, Ownable {
     }
     function getDollarBalanceOf(uint _tokenId) public view returns(uint) {
         return tokenIdToUSDT[_tokenId];
+    }
+    function split(uint _fromTokenId, uint _dollarAmount) public {
+        require(msg.sender == ownerOf(_fromTokenId), "!owner, nft");
+        require(!voteOnGoing(), "split paused while ongoing vote!");
+        require(_dollarAmount >= 500e18, "500$ min!");
+        require(tokenIdToUSDT[_fromTokenId] - _dollarAmount > 500e18, "500$ must be left atleast!");
+        tokenIdToUSDT[_fromTokenId] -= _dollarAmount;
+        if(toMint.length != 0)  {
+            uint CtokenId = toMint.length-1;
+            toMint.pop();
+            _balances[msg.sender] += 1;
+            _owners[CtokenId] = msg.sender;
+            tokenIdToUSDT[CtokenId] = _dollarAmount;
+        }
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _balances[msg.sender] += 1;
+        _owners[tokenId] = msg.sender;
+        tokenIdToUSDT[tokenId] = _dollarAmount;
+        _checkHolder(msg.sender);
     }
     function currentNFT() public view returns(uint) {
         return _tokenIdCounter.current();
