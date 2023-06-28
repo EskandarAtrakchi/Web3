@@ -55,7 +55,7 @@ const getWeb3 = async () => { //await is expected here
       
       catch (error) {// reject error 
 
-        reject(error);
+        reject('The error is :' + error);
 
       }
 
